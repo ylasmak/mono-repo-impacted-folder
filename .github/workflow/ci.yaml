@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  contents: read
+  pull-requests: write
+name: CI workflow
+
+jobs:
+  detectPullRequestImpactedProject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: "code checkout"
+      - name: "Detect folder changes"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+            gh pr diff ${{ github.event.pull_request.number }} --name-only
