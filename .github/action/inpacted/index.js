@@ -23,8 +23,14 @@ async function getChangedFiles() {
       pull_number,
     });
     core.notice("Done")
-    const changedFolder=response.data.map(file => path.dirname(file.filename).split('/')[0]);
-    return changedFolder;
+    const rootFolders = new Set();
+    
+    response.data.forEach(file => {
+      const rootFolder = path.dirname(file.filename).split('/')[0];
+      rootFolders.add(rootFolder);
+    });
+
+    return Array.from(rootFolders);
     // Analyze the files and detect impacted folders
     // Your logic for detecting impacted folders goes here
 
