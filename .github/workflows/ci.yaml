@@ -17,5 +17,5 @@ jobs:
           node-version: 20
       - name: install dependencies
         run: npm ci
-        workdir: .github/action/inpacted
-      - uses: .github/action/inpacted
+        working-directory: .github/action/inpacted
+      - uses: ./.github/action/inpacted
