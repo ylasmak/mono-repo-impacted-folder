@@ -52,7 +52,7 @@ async function run() {
           }
         })
         var output= JSON.stringify(Array.from(outputFolders))
-        core.notice(output)
+        core.notice(noChangeDetected)
         core.setOutput("change-folders",output)
         core.setOutput("no-change-detected",noChangeDetected)
         
