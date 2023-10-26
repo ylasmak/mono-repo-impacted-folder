@@ -1,8 +1,9 @@
 // Import necessary dependencies
 const core = require('@actions/core');
 const github = require('@actions/github');
+const path = require('path');
 
-async function run() {
+async function getChangedFiles() {
   try {
     const token = core.getInput('github-token');
     const pull_number = core.getInput('pull-request-id')
@@ -22,8 +23,8 @@ async function run() {
       pull_number,
     });
     core.notice("Done")
-    const changedFiles=response.data.map(file => file.filename);
-    core.notice(changedFiles)
+    const changedFolder=response.data.map(file => path.dirname(file.filename).split('/')[0]);
+    return changedFolder;
     // Analyze the files and detect impacted folders
     // Your logic for detecting impacted folders goes here
 
@@ -31,6 +32,12 @@ async function run() {
   } catch (error) {
     core.setFailed(error.message);
   }
+}
+
+async function run() {
+    const files= await getChangedFiles()
+    core.notice(files)
+   
 }
 
 run();
