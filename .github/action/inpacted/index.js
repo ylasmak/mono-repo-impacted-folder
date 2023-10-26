@@ -12,6 +12,7 @@ async function run() {
 
     // Get the pull request files
     core.notice("Get the pull request files")
+    core.notice(pull_number)
     const response = await client.pulls.listFiles({
       owner,
       repo,
