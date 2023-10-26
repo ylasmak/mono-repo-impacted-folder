@@ -38,16 +38,19 @@ async function getChangedFiles() {
 }
 
 async function run() {
-    const packageFolders= core.getInput('packages-folders')
-    if (packageFolders && Array.isArray(packageFolders)){
-      const files= await getChangedFiles()
+    try {
+      const packageFolders= core.getInput('packages-folders')
+      const folder= JSON.parse(packageFolders)
       core.notice(files)
-    }else {
-      core.setFailed("package-folders is not a valid array ");
+      if (folder && Array.isArray(folder)){
+        const files= await getChangedFiles()
+        core.notice(files)
+      }
+
+    } catch (error) {
+      core.setFailed(error.message);
     }
 
-
-   
 }
 
 run();
