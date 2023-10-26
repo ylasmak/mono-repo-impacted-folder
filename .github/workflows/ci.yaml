@@ -21,3 +21,4 @@ jobs:
       - uses: ./.github/action/inpacted
         with:
           github-token: ${{ github.token }}
+          pull-request-id : ${{ github.event.pull_request.number }}
