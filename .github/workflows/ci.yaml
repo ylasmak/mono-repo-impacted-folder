@@ -9,6 +9,8 @@ name: CI workflow
 jobs:
   detectPullRequestImpactedProject:
     runs-on: ubuntu-latest
+    outputs:
+      folderList: ${{ steps.folderList.outputs.change-folders }}
     steps:
       - uses: actions/checkout@v4
         name: "code checkout"
@@ -19,17 +21,19 @@ jobs:
         run: npm ci
         working-directory: .github/action/inpacted
       - uses: ./.github/action/inpacted
+        id: folderList
         with:
           github-token: ${{ github.token }}
           pull-request-id : ${{ github.event.pull_request.number }}
           packages-folders: '["blue-api", "green-api"]'
+      - run: echo ${{ steps.folderList.outputs.change-folders }}
   
   myjob1:
     runs-on: ubuntu-latest
     needs: detectPullRequestImpactedProject
     strategy:
       matrix: 
-        project: ${{ needs.detectPullRequestImpactedProject.outputs.change-folders}}
+        project: ${{ needs.detectPullRequestImpactedProject.outputs.change-folders }}
     steps:
       - run: pwd
         working-directory: ${{ matrix.project }}
