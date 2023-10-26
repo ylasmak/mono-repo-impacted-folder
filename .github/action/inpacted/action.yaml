@@ -5,7 +5,7 @@ inputs:
     description: github token.
     required: true
     type: string
-  pull_request_id:
+  pull-request-id:
     description: id of the pull request.
     required: true
     type: string
