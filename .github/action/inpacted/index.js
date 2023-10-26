@@ -41,7 +41,7 @@ async function run() {
     try {
       const outputFolders = new Set();
       const packageFolders= JSON.parse(core.getInput('packages-folders'))
-      core.notice(folder)
+      core.notice(packageFolders)
       if (packageFolders && Array.isArray(packageFolders)){
         const folders= await getChangedFolder()
         folders.forEach(folder => {
