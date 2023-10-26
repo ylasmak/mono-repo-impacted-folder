@@ -10,9 +10,12 @@ async function run() {
     // Get the pull request information
     const { owner, repo, pull_number } = github.context.issue;
 
+    
+
     // Get the pull request files
-    core.notice("Get the pull request files")
-    core.notice(pull_number)
+    core.notice("pull_number");
+    core.notice(pull_number);
+    core.notice("Get the pull request files");
     const response = await client.pulls.listFiles({
       owner,
       repo,
