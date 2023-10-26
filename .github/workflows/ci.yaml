@@ -39,6 +39,8 @@ jobs:
       matrix: 
         project: ${{ fromJson(needs.detectPullRequestImpactedProject.outputs.folderList) }}
     steps:
+      - uses: actions/checkout@v4
+        name: "code checkout"
       - run: |
           echo ${{ needs.detectPullRequestImpactedProject.outputs.folderList }}
           pwd
