@@ -37,9 +37,9 @@ jobs:
     needs: detectPullRequestImpactedProject
     # strategy:
     #   matrix: 
-    #     project: ${{ needs.detectPullRequestImpactedProject.outputs.folderLists }}
+    #     project: ${{ needs.detectPullRequestImpactedProject.outputs.folderList }}
     steps:
       - run: |
-          echo ${{ needs.detectPullRequestImpactedProject.outputs.folderLists }}
+          echo ${{ needs.detectPullRequestImpactedProject.outputs.folderList }}
           pwd
         # working-directory: ${{ matrix.project }}
