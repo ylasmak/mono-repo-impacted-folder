@@ -49,9 +49,11 @@ async function run() {
             outputFolders.add(folder);
           }
         })
-        
-        core.notice(JSON.stringify(Array.from(outputFolders)))
-        core.setOutput("change-folders",JSON.stringify(Array.from(outputFolders)))
+        var output= ","+ JSON.stringify(Array.from(outputFolders))+"'"
+
+
+        core.notice(output)
+        core.setOutput("change-folders",output)
       }
 
     } catch (error) {
