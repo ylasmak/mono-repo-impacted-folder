@@ -1,4 +1,5 @@
 name: Detect Impacted Folders
+description:  Detect Impacted Folders
 runs:
   using: 'node20'
   main:  'index.js'
