@@ -3,7 +3,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const path = require('path');
 
-async function getChangedFiles() {
+async function getChangedFolder() {
   try {
     const token = core.getInput('github-token');
     const pull_number = core.getInput('pull-request-id')
@@ -39,12 +39,19 @@ async function getChangedFiles() {
 
 async function run() {
     try {
-      const packageFolders= core.getInput('packages-folders')
-      const folder= JSON.parse(packageFolders)
+      const outputFolders = new Set();
+      const packageFolders= JSON.parse(core.getInput('packages-folders'))
       core.notice(folder)
-      if (folder && Array.isArray(folder)){
-        const files= await getChangedFiles()
-        core.notice(files)
+      if (packageFolders && Array.isArray(packageFolders)){
+        const folders= await getChangedFolder()
+        folders.forEach(folder => {
+          if (packageFolders.includes(folder)) {
+            outputFolders.add(folder);
+          }
+        })
+        
+        core.notice(Array.from(outputFolders))
+        core.setOutput("change-folders",Array.from(outputFolders))
       }
 
     } catch (error) {
