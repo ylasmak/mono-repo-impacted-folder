@@ -11,6 +11,11 @@ inputs:
     description: Monorepo projects folders
     required: true
 
+outputs:
+    change-folders:
+      description: list of impacted folders
+  
+
 runs:
   using: 'node20'
   main:  'index.js'
