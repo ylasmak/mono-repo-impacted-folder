@@ -8,6 +8,7 @@ async function run() {
     const pull_number = core.getInput('pull-request-id')
     const client = github.getOctokit(token).rest;
 
+
     // Get the pull request information
     const { owner, repo } = github.context.repo;
 
@@ -21,8 +22,8 @@ async function run() {
       pull_number,
     });
     core.notice("Done")
-    const files = response.data;
-    core.notice(files)
+    const changedFiles=response.data.map(file => file.filename);
+    core.notice(changedFiles)
     // Analyze the files and detect impacted folders
     // Your logic for detecting impacted folders goes here
 
