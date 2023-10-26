@@ -4,11 +4,9 @@ inputs:
   github-token:
     description: github token.
     required: true
-    type: string
   pull-request-id:
-    description: id of the pull request.
+    description: github token.
     required: true
-    type: string
 
 runs:
   using: 'node20'
