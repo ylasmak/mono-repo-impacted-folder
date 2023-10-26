@@ -32,14 +32,21 @@ jobs:
       #       echo "change-folders-formated='${{ steps.folderList.outputs.change-folders }}'" >> $GITHUB_OUTPUT
       #   name: Format Result
       #   id: formatResult
+  mymidllejob:
+    runs-on: ubuntu-latest
+    needs: detectPullRequestImpactedProject
+    if: needs.detectPullRequestImpactedProject.outputs.no-change-detected == "false"
+    steps:
+      - run: |
+          echo ${{ needs.detectPullRequestImpactedProject.outputs.no-change-detected }}
+          pwd
   
   myjob1:
     runs-on: ubuntu-latest
-    needs: detectPullRequestImpactedProject
-    if: ${{ needs.detectPullRequestImpactedProject.outputs.no-change-detected }} == "false"
-    # strategy:
-    #   matrix: 
-    #     project: ${{ fromJson(needs.detectPullRequestImpactedProject.outputs.folderList) }}
+    needs: [ detectPullRequestImpactedProject, mymidllejob]
+    strategy:
+      matrix: 
+        project: ${{ fromJson(needs.detectPullRequestImpactedProject.outputs.folderList) }}
     steps:
       - uses: actions/checkout@v4
         name: "code checkout"
