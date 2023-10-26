@@ -50,8 +50,8 @@ async function run() {
           }
         })
         
-        core.notice(Array.from(outputFolders))
-        core.setOutput("change-folders",Array.from(outputFolders))
+        core.notice(JSON.stringify(Array.from(outputFolders)))
+        core.setOutput("change-folders",JSON.stringify(Array.from(outputFolders)))
       }
 
     } catch (error) {
