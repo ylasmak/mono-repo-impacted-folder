@@ -11,18 +11,19 @@ async function run() {
     const { owner, repo, pull_number } = github.context.issue;
 
     // Get the pull request files
+    core.notice("Get the pull request files")
     const response = await client.pulls.listFiles({
       owner,
       repo,
       pull_number,
     });
-
+    core.notice("Done")
     const files = response.data;
     core.notice(files)
     // Analyze the files and detect impacted folders
     // Your logic for detecting impacted folders goes here
 
-    core.setOutput('impacted-folders', impactedFolders);
+   // core.setOutput('impacted-folders', impactedFolders);
   } catch (error) {
     core.setFailed(error.message);
   }
