@@ -6,7 +6,6 @@ async function run() {
   try {
     const token = core.getInput('github-token');
     const client = github.getOctokit(token).rest;
-    client.graphql.pulls
 
     // Get the pull request information
     const { owner, repo, pull_number } = github.context.issue;
