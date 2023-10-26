@@ -33,7 +33,7 @@ jobs:
     needs: detectPullRequestImpactedProject
     strategy:
       matrix: 
-        project: ${{ needs.detectPullRequestImpactedProject.outputs.change-folders }}
+        project: ${{ fromJson(needs.detectPullRequestImpactedProject.outputs.change-folders) }}
     steps:
       - run: pwd
         working-directory: ${{ matrix.project }}
