@@ -41,19 +41,21 @@ async function run() {
     try {
       const outputFolders = new Set();
       const packageFolders= JSON.parse(core.getInput('packages-folders'))
+      var noChangeDetected = true
       core.notice(packageFolders)
       if (packageFolders && Array.isArray(packageFolders)){
         const folders= await getChangedFolder()
         folders.forEach(folder => {
           if (packageFolders.includes(folder)) {
             outputFolders.add(folder);
+            noChangeDetected = false
           }
         })
         var output= JSON.stringify(Array.from(outputFolders))
-
-
-        core.notice(output)
+        core.notice(noChangeDetected)
         core.setOutput("change-folders",output)
+        core.setOutput("no-change-detected",noChangeDetected)
+        
       }
 
     } catch (error) {
