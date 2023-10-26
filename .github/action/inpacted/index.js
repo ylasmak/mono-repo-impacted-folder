@@ -49,7 +49,7 @@ async function run() {
             outputFolders.add(folder);
           }
         })
-        var output= ","+ JSON.stringify(Array.from(outputFolders))+"'"
+        var output= JSON.stringify(Array.from(outputFolders))
 
 
         core.notice(output)

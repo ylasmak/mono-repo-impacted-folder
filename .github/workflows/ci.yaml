@@ -26,7 +26,7 @@ jobs:
           github-token: ${{ github.token }}
           pull-request-id : ${{ github.event.pull_request.number }}
           packages-folders: '["blue-api", "green-api"]'
-      - run: echo ${{ steps.folderList.outputs.change-folders }}
+      - run: echo "'${{ steps.folderList.outputs.change-folders }}'"
   
   myjob1:
     runs-on: ubuntu-latest
