@@ -1,5 +1,10 @@
 name: Detect Impacted Folders
 description:  Detect Impacted Folders
+inputs:
+  github-token:
+    description: github token.
+    required: true
+    type: string
 runs:
   using: 'node20'
   main:  'index.js'
