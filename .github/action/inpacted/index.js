@@ -5,12 +5,11 @@ const github = require('@actions/github');
 async function run() {
   try {
     const token = core.getInput('github-token');
+    const pull_number = core.getBooleanInput('pull_request_id')
     const client = github.getOctokit(token).rest;
 
     // Get the pull request information
-    const { owner, repo, pull_number } = github.context.issue;
-
-    
+    const { owner, repo } = github.context.repo;
 
     // Get the pull request files
     core.notice("pull_number");
