@@ -5,7 +5,7 @@ const github = require('@actions/github');
 async function run() {
   try {
     const token = core.getInput('github-token');
-    const client = new github.GitHub(token);
+    const client = github.GitHub(token);
 
     // Get the pull request information
     const { owner, repo, pull_number } = github.context.issue;
@@ -18,7 +18,7 @@ async function run() {
     });
 
     const files = response.data;
-    core.info(files)
+    core.notice(files)
     // Analyze the files and detect impacted folders
     // Your logic for detecting impacted folders goes here
 
