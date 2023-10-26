@@ -24,25 +24,29 @@ async function getChangedFiles() {
     });
     core.notice("Done")
     const rootFolders = new Set();
-    
+
     response.data.forEach(file => {
       const rootFolder = path.dirname(file.filename).split('/')[0];
       rootFolders.add(rootFolder);
     });
 
     return Array.from(rootFolders);
-    // Analyze the files and detect impacted folders
-    // Your logic for detecting impacted folders goes here
 
-   // core.setOutput('impacted-folders', impactedFolders);
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
 async function run() {
-    const files= await getChangedFiles()
-    core.notice(files)
+    const packageFolders= core.getInput('packages-folders')
+    if (packageFolders && Array.isArray(packageFolders)){
+      const files= await getChangedFiles()
+      core.notice(files)
+    }else {
+      core.setFailed("package-folders is not a valid array ");
+    }
+
+
    
 }
 

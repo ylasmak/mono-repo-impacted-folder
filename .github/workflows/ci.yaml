@@ -22,3 +22,4 @@ jobs:
         with:
           github-token: ${{ github.token }}
           pull-request-id : ${{ github.event.pull_request.number }}
+          packages-folders: '[blue-api, green-api]'
