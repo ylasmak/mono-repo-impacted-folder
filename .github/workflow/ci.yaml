@@ -16,8 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: "code checkout"
-      - name: "Detect folder changes"
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-            gh pr diff ${{ github.event.pull_request.number }} --name-only
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: install dependencies
+        run: npm ci
+        workdir: .github/action/inpacted
+      - uses: .github/action/inpacted
