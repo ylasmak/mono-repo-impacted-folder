@@ -37,7 +37,7 @@ jobs:
     needs: detectPullRequestImpactedProject
     strategy:
       matrix: 
-        project: ${{ needs.detectPullRequestImpactedProject.outputs.folderList }}
+        project: ${{ fromJson(needs.detectPullRequestImpactedProject.outputs.folderList) }}
     steps:
       - run: |
           echo ${{ needs.detectPullRequestImpactedProject.outputs.folderList }}
