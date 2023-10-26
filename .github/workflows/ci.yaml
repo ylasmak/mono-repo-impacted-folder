@@ -10,7 +10,7 @@ jobs:
   detectPullRequestImpactedProject:
     runs-on: ubuntu-latest
     outputs:
-      folderList: ${{ steps.folderList.outputs.change-folders-formated }}
+      folderList: ${{ steps.folderList.outputs.change-folders }}
     steps:
       - uses: actions/checkout@v4
         name: "code checkout"
