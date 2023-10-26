@@ -1,4 +1,21 @@
 name: Detect Impacted Folders
+description:  Detect Impacted Folders
+inputs:
+  github-token:
+    description: github token.
+    required: true
+  pull-request-id:
+    description: github token.
+    required: true
+  packages-folders:
+    description: Monorepo projects folders
+    required: true
+
+outputs:
+    change-folders:
+      description: list of impacted folders
+  
+
 runs:
   using: 'node20'
   main:  'index.js'
