@@ -10,7 +10,7 @@ jobs:
   detectPullRequestImpactedProject:
     runs-on: ubuntu-latest
     outputs:
-      folderList: ${{ steps.folderList.outputs.change-folders }}
+      folderList: ${{ steps.folderList.outputs.change-folders-formated }}
     steps:
       - uses: actions/checkout@v4
         name: "code checkout"
@@ -26,7 +26,11 @@ jobs:
           github-token: ${{ github.token }}
           pull-request-id : ${{ github.event.pull_request.number }}
           packages-folders: '["blue-api", "green-api"]'
-      - run: echo "'${{ steps.folderList.outputs.change-folders }}'"
+      - run: |
+            echo "change-folders-formated='${{ steps.folderList.outputs.change-folders }}'"
+            echo "change-folders-formated='${{ steps.folderList.outputs.change-folders }}'" >> $GITHUB_OUTPUT
+        name: Format Result
+        id: formatResult
   
   myjob1:
     runs-on: ubuntu-latest
